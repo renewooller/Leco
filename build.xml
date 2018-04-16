@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="myProject" default="main" basedir=".">
+    
+	<property file = "build.properties" />
+	<property name = "srcDir" location = "src"> </property>
+	<property name = "srcAPIs" location = "APIs"> </property>
+		
+	<property name = "buildDir" location = "build" />
+	<property name = "binDir" location = "${buildDir}/bin"> </property>
+	<property name = "jarDir" location = "${buildDir}/jar"> </property>
+    
+	<target name="main" depends="clean, init, compile">
+		<echo>
+			Built LeCo
+		</echo>
+	</target>
+	
+	<target name = "clean">
+		<delete dir="${buildDir}"/>
+	</target>
+	
+	<target name = "init" >
+		<mkdir dir = "${binDir}"/>
+		<mkdir dir = "${jarDir}"/>
+	</target>
+	
+	<target name = "compile">
+		<javac srcdir = "${srcDir}:${srcAPIs}" destdir="${binDir}"/>
+	</target>
+	
+	<target name = "compress">
+		<jar destfile = "${jarDir}/LeCo${leco.version}.${leco.version.minor}.jar" basedir = "${binDir}" includes = "**/*.class"  />
+	</target>
+	
+</project>
